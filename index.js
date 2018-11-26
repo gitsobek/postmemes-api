@@ -25,6 +25,10 @@ app.use(passport.session())
 require('./routes/auth')(app)
 require('./routes/posts')(app)
 
+app.get('/', (req, res) => {
+    res.send({message: "Hello"});
+})
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log('Listening on port', PORT)
