@@ -26,7 +26,7 @@ require('./routes/auth')(app)
 require('./routes/posts')(app)
 
 app.get('/', (req, res) => {
-    res.send({message: "Hello"});
+    res.send({message: "Hello, postmemes API user!"});
 })
 
 const PORT = process.env.PORT || 5000
