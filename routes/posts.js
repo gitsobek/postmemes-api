@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const checkLogin = require('../middlewares/checkLogin')
+const clearCache = require('../middlewares/clearCache')
 
 const Post = mongoose.model('Post')
 
@@ -10,16 +11,22 @@ module.exports = app => {
             _id: req.params.id
         })
 
-        res.send(post)
+        if (!post) res.status(404).send({ message: "No such post."})
+
+        res.status(200).send(post)
     })
 
     app.get('/api/posts', checkLogin, async (req, res) => {
-        const posts = await Post.find({ _user: req.user.id })
+        const posts = await Post
+            .find({ _user: req.user.id })
+            .cache({ key: req.user.id })
 
-        res.send(posts)
+        if (!posts) res.status(404).send({ message: "No posts."})
+
+        res.status(200).send(posts)
     })
 
-    app.post('/api/posts', checkLogin, async (req, res) => {
+    app.post('/api/posts', checkLogin, clearCache, async (req, res) => {
         const { title, content } = req.body
 
         const post = new Post({

@@ -7,9 +7,13 @@
     "node": "10.13.0",
     "npm": "6.4.1"
   },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./tests/setup.js"
+  },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js --ignore tests"
+    "dev": "nodemon index.js --ignore tests",
+    "test": "jest --forceExit --detectOpenHandles --maxWorkers=10"
   },
   "author": "",
   "license": "ISC",
@@ -20,11 +24,16 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "jest": "^24.1.0",
     "migrate-mongoose": "^3.2.2",
-    "mongoose": "^5.3.9",
+    "mongoose": "^5.3.15",
+    "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "puppeteer": "^1.12.1",
+    "redis": "^2.8.0",
     "uuid": "^3.3.2"
   }
 }
